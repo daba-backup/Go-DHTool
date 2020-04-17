@@ -1,4 +1,4 @@
-package dh_math
+package dhmath
 
 import (
 	"math"

@@ -1,4 +1,4 @@
-package dh_filename
+package dhfilename
 
 import (
 	"strings"

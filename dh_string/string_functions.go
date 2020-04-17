@@ -1,4 +1,4 @@
-package dh_string
+package dhstring
 
 import (
 	"fmt"
