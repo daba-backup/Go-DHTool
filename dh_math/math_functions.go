@@ -1,4 +1,4 @@
-package go_dhtool_math
+package dh_math
 
 import (
 	"math"

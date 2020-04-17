@@ -1,4 +1,4 @@
-package go_dhtool_byte
+package dh_byte
 
 import (
 	"bytes"

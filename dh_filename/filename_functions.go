@@ -1,4 +1,4 @@
-package go_dhtool
+package dh_filename
 
 import (
 	"strings"

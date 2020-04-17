@@ -1,4 +1,4 @@
-package go_dhtool_file
+package dh_file
 
 import (
 	"bufio"

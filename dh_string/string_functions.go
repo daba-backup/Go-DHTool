@@ -1,4 +1,4 @@
-package go_dhtool_string
+package dh_string
 
 import (
 	"fmt"
