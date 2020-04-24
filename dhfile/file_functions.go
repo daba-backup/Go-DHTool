@@ -26,6 +26,20 @@ func GetFileAllLines(filename string) ([]string, error) {
 
 	return lines, nil
 }
+func GetFileAllLines_Concat(filename string) (string, error) {
+	lines, err := GetFileAllLines(filename)
+	if err != nil {
+		return "", err
+	}
+
+	concat := ""
+	for _, line := range lines {
+		concat += line
+		concat += "\n"
+	}
+
+	return concat, nil
+}
 func GetFileAllBin(filename string) ([]byte, error) {
 	data, err := ioutil.ReadFile(filename)
 	return data, err
