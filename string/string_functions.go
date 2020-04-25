@@ -1,4 +1,4 @@
-package dhstring
+package string
 
 import (
 	"fmt"

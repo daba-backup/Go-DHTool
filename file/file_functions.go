@@ -1,4 +1,4 @@
-package dhfile
+package file
 
 import (
 	"bufio"

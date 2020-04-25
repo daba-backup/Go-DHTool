@@ -1,4 +1,4 @@
-package dhbyte
+package byte
 
 import (
 	"bytes"
