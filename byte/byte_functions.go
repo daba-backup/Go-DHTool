@@ -3,6 +3,7 @@ package byte
 import (
 	"bytes"
 	"encoding/binary"
+	"log"
 )
 
 func Encode(v interface{}, le_flag bool) ([]byte, error) {
@@ -73,4 +74,50 @@ func DecodeToUint16(b []byte, le_flag bool) (uint16, error) {
 	}
 
 	return v, nil
+}
+
+func GetFloat32ValueFromBin_LE(bin []byte, pos int) float32 {
+	var buffer [4]byte
+	buffer[0] = bin[pos]
+	buffer[1] = bin[pos+1]
+	buffer[2] = bin[pos+2]
+	buffer[3] = bin[pos+3]
+
+	ret, err := DecodeToFloat32(bin[:], true)
+	if err != nil {
+		log.Printf("trace: %v", err)
+		return 0.0
+	}
+
+	return ret
+}
+func GetInt16ValueFromBin_LE(bin []byte, pos int) int16 {
+	var buffer [4]byte
+	buffer[0] = bin[pos]
+	buffer[1] = bin[pos+1]
+	buffer[2] = bin[pos+2]
+	buffer[3] = bin[pos+3]
+
+	ret, err := DecodeToInt16(bin[:], true)
+	if err != nil {
+		log.Printf("trace: %v", err)
+		return 0.0
+	}
+
+	return ret
+}
+func GetUint16ValueFromBin_LE(bin []byte, pos int) uint16 {
+	var buffer [4]byte
+	buffer[0] = bin[pos]
+	buffer[1] = bin[pos+1]
+	buffer[2] = bin[pos+2]
+	buffer[3] = bin[pos+3]
+
+	ret, err := DecodeToUint16(bin[:], true)
+	if err != nil {
+		log.Printf("trace: %v", err)
+		return 0.0
+	}
+
+	return ret
 }
