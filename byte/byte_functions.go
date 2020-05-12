@@ -3,7 +3,7 @@ package byte
 import (
 	"bytes"
 	"encoding/binary"
-	"log"
+	"fmt"
 )
 
 func Encode(v interface{}, le_flag bool) ([]byte, error) {
@@ -25,6 +25,10 @@ func Encode(v interface{}, le_flag bool) ([]byte, error) {
 	return ret, nil
 }
 func DecodeToFloat32(b []byte, le_flag bool) (float32, error) {
+	if len(b) != 4 {
+		return 0.0, fmt.Errorf("Invalid slice length: %v", len(b))
+	}
+
 	buf := bytes.NewReader(b)
 	var v float32
 
@@ -42,6 +46,10 @@ func DecodeToFloat32(b []byte, le_flag bool) (float32, error) {
 	return v, nil
 }
 func DecodeToInt16(b []byte, le_flag bool) (int16, error) {
+	if len(b) != 2 {
+		return 0, fmt.Errorf("Invalid slice length: %v", len(b))
+	}
+
 	buf := bytes.NewReader(b)
 	var v int16
 
@@ -59,6 +67,10 @@ func DecodeToInt16(b []byte, le_flag bool) (int16, error) {
 	return v, nil
 }
 func DecodeToUint16(b []byte, le_flag bool) (uint16, error) {
+	if len(b) != 2 {
+		return 0, fmt.Errorf("Invalid slice length: %v", len(b))
+	}
+
 	buf := bytes.NewReader(b)
 	var v uint16
 
@@ -76,48 +88,41 @@ func DecodeToUint16(b []byte, le_flag bool) (uint16, error) {
 	return v, nil
 }
 
-func GetFloat32ValueFromBin_LE(bin []byte, pos int) float32 {
+func GetFloat32ValueFromBin_LE(bin []byte, pos int) (float32, error) {
 	var buffer [4]byte
 	buffer[0] = bin[pos]
 	buffer[1] = bin[pos+1]
 	buffer[2] = bin[pos+2]
 	buffer[3] = bin[pos+3]
 
-	ret, err := DecodeToFloat32(bin[:], true)
+	ret, err := DecodeToFloat32(buffer[:], true)
 	if err != nil {
-		log.Printf("trace: %v", err)
-		return 0.0
+		return 0.0, err
 	}
 
-	return ret
+	return ret, nil
 }
-func GetInt16ValueFromBin_LE(bin []byte, pos int) int16 {
-	var buffer [4]byte
+func GetInt16ValueFromBin_LE(bin []byte, pos int) (int16, error) {
+	var buffer [2]byte
 	buffer[0] = bin[pos]
 	buffer[1] = bin[pos+1]
-	buffer[2] = bin[pos+2]
-	buffer[3] = bin[pos+3]
 
-	ret, err := DecodeToInt16(bin[:], true)
+	ret, err := DecodeToInt16(buffer[:], true)
 	if err != nil {
-		log.Printf("trace: %v", err)
-		return 0.0
+		return 0, err
 	}
 
-	return ret
+	return ret, nil
 }
-func GetUint16ValueFromBin_LE(bin []byte, pos int) uint16 {
-	var buffer [4]byte
+func GetUint16ValueFromBin_LE(bin []byte, pos int) (uint16, error) {
+	var buffer [2]byte
 	buffer[0] = bin[pos]
 	buffer[1] = bin[pos+1]
-	buffer[2] = bin[pos+2]
-	buffer[3] = bin[pos+3]
 
-	ret, err := DecodeToUint16(bin[:], true)
+	ret, err := DecodeToUint16(buffer[:], true)
 	if err != nil {
-		log.Printf("trace: %v", err)
-		return 0.0
+		return 0, err
 	}
 
-	return ret
+	return ret, nil
 }
